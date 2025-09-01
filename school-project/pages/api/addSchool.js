@@ -1,7 +1,13 @@
-import { IncomingForm } from 'formidable';
-import fs from 'fs';
-import path from 'path';
+import { IncomingForm } from 'formidable-serverless';
+import { v2 as cloudinary } from 'cloudinary';
 import { createConnection } from 'mysql2/promise';
+
+// Configure Cloudinary with environment variables
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export const config = {
   api: {
@@ -14,19 +20,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'Method Not Allowed' });
   }
 
-  // Define the upload directory
-  const uploadDir = path.join(process.cwd(), 'public', 'schoolImages');
-
-  // Ensure directory exists
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-  }
-
-  const form = new IncomingForm({
-    uploadDir,
-    keepExtensions: true,
-    multiples: false,
-  });
+  const form = new IncomingForm();
 
   try {
     const [fields, files] = await new Promise((resolve, reject) => {
@@ -36,7 +30,7 @@ export default async function handler(req, res) {
       });
     });
 
-    // Check required fields
+    // Ensure all fields and the image file are present
     const requiredFields = ['name', 'address', 'city', 'states', 'contact', 'email_id', 'board'];
     for (const field of requiredFields) {
       if (!fields[field] || fields[field][0] === '') {
@@ -49,17 +43,15 @@ export default async function handler(req, res) {
     }
 
     const file = files.image[0];
-    const oldPath = file.filepath;
 
-    // Final public path to be saved in DB
-    const imageFileName = file.newFilename;
-    const newImagePath = path.join(uploadDir, imageFileName);
-    const imageUrl = `/schoolImages/${imageFileName}`; // Relative path for frontend
+    // Upload image to Cloudinary
+    const result = await cloudinary.uploader.upload(file.filepath, {
+      folder: 'schoolImages',
+    });
 
-    // Move file from tmp to public/schoolImages
-    fs.renameSync(oldPath, newImagePath);
+    const imageUrl = result.secure_url;
 
-    // MySQL insert
+    // Connect to MySQL and insert data
     const connection = await createConnection({
       port: process.env.DB_PORT,
       host: process.env.DB_HOST,
