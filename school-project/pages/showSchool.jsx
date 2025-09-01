@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import styles from '../styles/showSchool.module.css';
 
 export default function ShowSchools() {
@@ -48,18 +47,15 @@ export default function ShowSchools() {
       </h2>
       <div className={styles.grid}>
         {schools.map((school, index) => (
-          <div
-            key={index}
-            className={styles.card}
-          >
+          <div key={index} className={styles.card}>
             {school.image && (
               <div className={styles.imageContainer}>
-                <Image
-                  src={school.image}
+                <img
+                  src={`https://school-directory-qx3x.onrender.com${school.image}`}
                   alt={school.name}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className={styles.image}
+                  width="100%"
+                  height="auto"
                 />
               </div>
             )}
@@ -72,7 +68,7 @@ export default function ShowSchools() {
                   <p className={styles.board}>{school.board}</p>
                 )}
               </div>
-             <p className={styles.info1}>
+              <p className={styles.info1}>
                 <span className={styles.label}></span> {school.states}
               </p>
               <h3 className={styles.cardTitle}>{school.name}</h3>
