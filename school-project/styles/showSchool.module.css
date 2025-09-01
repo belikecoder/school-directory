@@ -1,0 +1,153 @@
+/* Container for the entire page */
+.container {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  padding: 40px 20px;
+  background-color: #f0f4f8;
+  min-height: 100vh;
+}
+
+/* Page title */
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: #4a90e2;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* Updated grid for school cards to ensure 4 per row */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Individual school card */
+.card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Image container for proper aspect ratio */
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: #e2e8f0;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+/* Content section below the image */
+.content {
+  padding: 25px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card header with rating and board */
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.rating {
+  color: #ffc107; /* Star color */
+  font-size: 1.9rem;
+}
+
+.starFilled,
+.starHalf,
+.starEmpty {
+  color: #ffc107;
+}
+
+.starEmpty {
+  color: #ccc;
+}
+
+.board {
+  color: #4a90e2;
+  font-weight: bold;
+}
+
+/* Card title (School Name) */
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #2d3748;
+  margin-top: 5px; /* Adjust spacing after city */
+  margin-bottom: 10px;
+}
+
+/* Information lines (address, city, board) */
+.info {
+  font-size: 0.95rem;
+  color: #4a5568;
+  line-height: 1.5;
+  margin-bottom: 5px;
+}
+.info1 {
+  font-size: 0.85rem;
+  color: #00ccff;
+  line-height: 1.5;
+  margin-bottom: 5px;
+}
+.label {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+/* Apply Now Button */
+.applyButton {
+  width: 100%;
+  padding: 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+.applyButton:hover {
+  background-color: #45a049;
+}
