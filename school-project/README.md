@@ -54,8 +54,9 @@ The application will be accessible at `http://localhost:3000`.
 
 ## API Endpoints
 
-- **`GET /api/showSchool`**: Fetches all school records from the database.
-- **`POST /api/addSchool`**: Adds a new school to the database. Accepts `multipart/form-data`.
+- https://school-directory-qx3x.onrender.com/showSchool: Fetches all school records from the database.
+- https://school-directory-qx3x.onrender.com/addSchool**: Adds a new school to the database. Accepts `multipart/form-data`.
+  
 
 ## Database Schema
 
