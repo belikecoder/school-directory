@@ -50,12 +50,12 @@ You need to have the following installed on your machine:
     
    ***Live Link***  
 
-The application will be accessible at `http://localhost:3000`.
+The application will be accessible at 'https://school-directory-qx3x.onrender.com'.
 
 ## API Endpoints
 
-- https://school-directory-qx3x.onrender.com/showSchool: Fetches all school records from the database.
-- https://school-directory-qx3x.onrender.com/addSchool**: Adds a new school to the database. Accepts `multipart/form-data`.
+- 'https://school-directory-qx3x.onrender.com/showSchool': Fetches all school records from the database.
+- 'https://school-directory-qx3x.onrender.com/addSchool'**: Adds a new school to the database. Accepts `multipart/form-data`.
   
 
 ## Database Schema
