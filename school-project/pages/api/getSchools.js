@@ -7,15 +7,17 @@ export default async function handler(req, res) {
 
   try {
     const connection = await createConnection({
-  port:process.env.DB_PORT,
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-});
+      port: process.env.DB_PORT,
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME
+    });
 
-    // Updated query to also fetch the `board` column
-    const [rows] = await connection.execute('SELECT name, states, city, image, board FROM schools');
+    // Updated query to select all required columns for the school card
+    const [rows] = await connection.execute(
+      'SELECT name, states, city, image, board, address, contact FROM schools'
+    );
     await connection.end();
 
     res.status(200).json(rows);
